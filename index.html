@@ -1,14 +1,18 @@
 ﻿<!DOCTYPE html>
 <html ng-app>
 <head>
+<title>王老外的網頁</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
 </head>
 <body>
   <!--字串宣告-->
   </br>
-  {{'Hello World!'}}
+  <h1>Hello World</h1> 
   </br>
   <!--model宣告應用-->
+  <p>Hello to {{userName|'Everyone'}}</p>
+  <label>輸入你的姓名</label>
+  <input type="text" ng-model="userName">
   數量: <input type="number" ng-model="quantity" ng-init="quantity = 1">
   <br>
   單價: <input type="number" ng-model="price" ng-init="price = 500">
