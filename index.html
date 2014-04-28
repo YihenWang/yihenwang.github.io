@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html ng-app>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+</head>
+<body>
+  /*字串宣告*/
+  {{'Hello World!'}}
+  </br>
+  /*model宣告應用*/
+  數量: <input type="number" ng-model="quantity" ng-init="quantity = 1">
+  <br>
+  單價: <input type="number" ng-model="price" ng-init="price = 500">
+  <br>
+  總價: {{ quantity * price }}
+</body>
+</html>
