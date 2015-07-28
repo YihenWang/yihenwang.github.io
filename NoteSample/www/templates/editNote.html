@@ -1,0 +1,20 @@
+<ion-view title="編輯記事">
+    <ion-nav-buttons side="left">
+        <button class="button ion-chevron-left" ng-click="back('home')">返回</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="update(note)">修改</button>
+        <button class="button" ng-click="delete(note)">刪除</button>
+    </ion-nav-buttons>
+    <ion-content scroll="false">
+        <div style="text-align: center;font-size: 1.2rem;font-weight: bold;">{{note.date}}</div>
+            <label class="item item-input item-stacked-label" style="border: 1px;">
+                <span class="input-label" style="font-weight: bold;">標題</span>
+                <input type="text" ng-model="note.title">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label" style="font-weight: bold;">記事內容</span>
+                <textarea placeholder="記事內容" ng-model="note.message" rows="25"></textarea>
+            </label>
+    </ion-content>
+</ion-view>

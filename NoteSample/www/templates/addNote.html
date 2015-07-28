@@ -1,0 +1,19 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">新增記事</h1>
+        <ion-button side="left">
+            <button class="button" ng-click="closeModal()">返回</button>
+        </ion-button>
+    </ion-header-bar>
+    <ion-content scroll="false">
+        <label class="item item-input item-stacked-label" style="border: 1px;">
+            <span class="input-label" style="font-weight: bold;">標題</span>
+            <input type="text" ng-model="note.title" placeholder="輸入標題">
+        </label>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label" style="font-weight: bold;">記事內容</span>
+            <textarea placeholder="記事內容" ng-model="note.message" rows="25"></textarea>
+        </label>
+        <button class="button button-block button-positive" ng-click="insert(note)">新增</button>
+    </ion-content>
+</ion-modal-view>

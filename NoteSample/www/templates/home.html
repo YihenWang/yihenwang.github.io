@@ -1,0 +1,20 @@
+<ion-view title="記事本">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear icon-right ion-compose" ng-click="addNote()">新增</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list class="list">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="note in notes" type="item-text-wrap" href="#/edit/{{note.id}}">
+                <div class="row">
+                    <div class="col col-75">{{note.title}}：{{note.message.substr(0,10)}}...</div>
+                    <div class="col col-10">{{note.date}}</div>
+                    <div class="col"><i class="icon ion-chevron-right icon-accessory"></i></div>
+                </div>
+                <ion-option-button class="button-assertive" ng-click="remove(note)">
+                    刪除
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <span ng-show="!notes.length">目前沒有資料!!!</span>
+    </ion-content>
+</ion-view>
