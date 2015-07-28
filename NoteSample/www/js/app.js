@@ -37,7 +37,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services','starter.Hom
                     name: 'noteDB'
                 });
             } else {
-                db = window.openDatabase('noteDB', "1.0", "Note app", -1);
+                if(window.openDatabase==null||window.openDatabase==undefined)
+                {
+                    db = $cordovaSQLite.openDB({
+                        name: 'noteDB'
+                    });
+                }
+                else
+                    db = window.openDatabase('noteDB', "1.0", "Note app", -1);
             }
             //建立note資料表,有id、title、message、date四個欄位
             $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS " + "note (id integer primary key AUTOINCREMENT, title text, message text,date text)");
