@@ -1,0 +1,47 @@
+<ion-view title="老外&貝貝的婚禮">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">大名：</span>
+                <input type="text" placeholder="張三">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">手機：</span>
+                <input type="tel" placeholder="0912345678">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    屬於：
+                </span>
+                <ion-radio style="border:0;" ng-model="ourGroup" ng-value="'男方親友'">男方親友</ion-radio>
+                <ion-radio style="border:0;" ng-model="ourGroup" ng-value="'女方親友'">女方親友</ion-radio>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    參加人數：
+                </span>
+                <ion-radio style="border:0;" ng-model="attendance" ng-value="1" ng-change="checkAttendance(attendance)">
+                    自己<i class="ion-android-person"></i></ion-radio>
+                <ion-radio style="border:0;" ng-model="attendance" ng-value="2" ng-change="checkAttendance(attendance)">
+                    攜伴<i class="ion-android-people"></i></ion-radio>
+                <ion-radio style="border:0;" ng-model="attendance" ng-value="3" ng-change="checkAttendance(attendance)">
+                    攜家帶眷<i class="ion-android-person-add"></i></ion-radio>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    寄送地址：
+                </span>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">
+                    備註：
+                </span>
+                <textarea placeholder="備註"></textarea>
+            </label>
+        </div>
+        <div class="row">
+            <button class="button button-block button-positive">送出</button>
+        </div>
+
+    </ion-content>
+</ion-view>
