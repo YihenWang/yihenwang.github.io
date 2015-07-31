@@ -1,5 +1,13 @@
 <ion-view title="老外&貝貝的婚禮">
     <ion-content>
+        <div class="item item-image">
+            <img src="../img/Wedding.png" style="width: 75%;height: 75%">
+            <div class="info">
+                Dears,<br>
+                我們將在11/7(六)中午舉辦婚禮宴客,<br>
+                希望大家能共襄盛舉,所以要麻煩填個問卷
+            </div>
+        </div>
         <div class="list">
             <label class="item item-input item-stacked-label">
                 <span class="input-label">大名：</span>
@@ -39,12 +47,12 @@
                     <div data-role="zipcode"
                          data-name="zipcode"
                          data-value=""
-                         data-style="zipcode-style" class="col">
+                         data-style="zipcode-style" class="col col-20">
                     </div>
                     <div data-role="county"
                          data-name="county"
                          data-value="縣市"
-                         data-style="county-style" class="col">
+                         data-style="county-style" class="col col-34">
                     </div>
                     <div data-role="district"
                          data-name="district"
@@ -53,7 +61,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <textarea placeholder="請填入您的地址"></textarea>
+                    <textarea placeholder="請填入您的地址" class="street-style"></textarea>
                 </div>
             </div>
 
@@ -61,7 +69,7 @@
                 <span class="input-label">
                     備註：
                 </span>
-                <textarea placeholder="備註"></textarea>
+                <textarea placeholder="(P.S.是否吃素或想留什麼話)"></textarea>
             </label>
         </div>
         <div class="row">

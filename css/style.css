@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 body,html{
     font-size: 1em;
-    font-family:  "Roboto";
+    font-family:  "Microsoft JhengHei";
 }
 #zipcode {
     font-size: 1.1em;
@@ -16,4 +16,17 @@ body,html{
 .district-style {
     width:100%;
     font-size: 1.1em;
+}
+.street-style{
+    width:100%;
+    font-size: 1.1em;
+    text-align: center;
+    margin-top:.5em;
+}
+.info{
+    text-align: left;
+    margin:1em;
+    font-weight: bold;
+    color: #387ef5;
+    line-height: 1.5em;
 }
