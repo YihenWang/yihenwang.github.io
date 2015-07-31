@@ -3,3 +3,17 @@ body,html{
     font-size: 1em;
     font-family:  "Roboto";
 }
+#zipcode {
+    font-size: 1.1em;
+    background-color: #ffffff;
+    text-align: center;
+    width: 100%;
+}
+.county-style {
+    width:100%;
+    font-size: 1.1em;
+}
+.district-style {
+    width:100%;
+    font-size: 1.1em;
+}

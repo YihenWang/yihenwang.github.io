@@ -22,16 +22,41 @@
                 </span>
                 <ion-radio style="border:0;" ng-model="attendance" ng-value="1" ng-change="checkAttendance(attendance)">
                     自己<i class="ion-android-person"></i></ion-radio>
-                <ion-radio style="border:0;" ng-model="attendance" ng-value="2" ng-change="checkAttendance(attendance)">
+                <ion-radio style="border:0;" id="couple" ng-model="attendance" ng-value="2"
+                           ng-change="checkAttendance(attendance)">
                     攜伴<i class="ion-android-people"></i></ion-radio>
                 <ion-radio style="border:0;" ng-model="attendance" ng-value="3" ng-change="checkAttendance(attendance)">
                     攜家帶眷<i class="ion-android-person-add"></i></ion-radio>
             </label>
-            <label class="item item-input item-stacked-label">
+            <label class="item item-stacked-label">
                 <span class="input-label">
                     寄送地址：
                 </span>
             </label>
+
+            <div id="twzipcode">
+                <div class="row">
+                    <div data-role="zipcode"
+                         data-name="zipcode"
+                         data-value=""
+                         data-style="zipcode-style" class="col">
+                    </div>
+                    <div data-role="county"
+                         data-name="county"
+                         data-value="縣市"
+                         data-style="county-style" class="col">
+                    </div>
+                    <div data-role="district"
+                         data-name="district"
+                         data-value="鄉鎮市區"
+                         data-style="district-style" class="col">
+                    </div>
+                </div>
+                <div class="row">
+                    <textarea placeholder="請填入您的地址"></textarea>
+                </div>
+            </div>
+
             <label class="item item-input item-stacked-label">
                 <span class="input-label">
                     備註：
@@ -40,7 +65,7 @@
             </label>
         </div>
         <div class="row">
-            <button class="button button-block button-positive">送出</button>
+            <button class="button button-block button-calm">送出</button>
         </div>
 
     </ion-content>
