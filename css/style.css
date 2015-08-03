@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 body,html{
     font-size: 1em;
-    font-family:  "Microsoft JhengHei";
+    font-family:  "Microsoft JhengHei" !important;
 }
 #zipcode {
     font-size: 1.1em;
