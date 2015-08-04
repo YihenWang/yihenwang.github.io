@@ -1,5 +1,5 @@
 angular.module('myWeddingInfo.controllers', [])
-    .controller('mainCtrl', function ($scope, $ionicModal, $state, $ionicPopup, $ionicLoading, Common, DataParse) {
+    .controller('mainCtrl', function ($scope, $ionicModal, $location, $ionicPopup, $ionicLoading, $ionicScrollDelegate, Common, DataParse) {
         $scope.weddingInfo = {};
         $('#twzipcode').twzipcode();
         $scope.showMask = function () {
@@ -56,10 +56,14 @@ angular.module('myWeddingInfo.controllers', [])
             };
             var callback = function (result) {
                 if (result) {
-                    DataParse.Update(result,params);
+                    DataParse.Update(result, params, function () {
+                        window.location='/#/app/thanks';
+                    });
                 }
                 else {
-                    DataParse.Add(params);
+                    DataParse.Add(params,function () {
+                        window.location='/#/app/thanks';
+                    });
                 }
                 $scope.hideMask();
                 $scope.weddingInfo = {};

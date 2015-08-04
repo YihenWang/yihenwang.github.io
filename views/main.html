@@ -1,5 +1,5 @@
 <ion-view title="老外&貝貝的婚禮">
-    <ion-content id="wdBody">
+    <ion-content class="wdBody">
         <div class="row">
         <div class="col col-25 wdSide"></div>
         <div class="col wdContent">
@@ -39,7 +39,7 @@
                         攜伴<i class="ion-android-people"></i></ion-radio>
                     <ion-radio style="border:0;" ng-model="weddingInfo.Attendance" ng-value="3"
                                ng-change="checkAttendance(weddingInfo.Attendance)" name="Attendance">
-                        攜家帶眷<i class="ion-android-person-add"></i></ion-radio>
+                        攜家帶眷<i class="ion-ios-people"></i></ion-radio>
                 </label>
 
                 <div id="twzipcode" class="item">
@@ -80,6 +80,7 @@
                 <div class="padding">
                     <button class="button button-block button-calm" ng-click="sendData(weddingInfo)">送出</button>
                 </div>
+                <br>
             </form>
         </div>
         <div class="col col-25 wdSide"></div>

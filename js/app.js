@@ -5,13 +5,30 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddingInfo.services'])
     .config(function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/main');
+        $urlRouterProvider.otherwise('/app/main');
         $stateProvider
-            .state('main', {
+            .state('app', {
+                url: '/app',
+                abstract: true,
+                templateUrl: 'views/sidemenu.html'
+            })
+            .state('app.main', {
                 url: '/main',
-                templateUrl: 'views/main.html',
-                controller: 'mainCtrl',
-                cache: false
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/main.html',
+                        controller: 'mainCtrl'
+                    }
+                }
+            })
+            .state('app.thanks', {
+                url: '/thanks',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/thanks.html',
+                        controller: 'mainCtrl'
+                    }
+                }
             });
     })
     .run(function ($ionicPlatform) {
@@ -22,7 +39,7 @@ angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddin
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if (window.StatusBar) {
-                StatusBar.styleDefault();
+                StatusBar.hide();
             }
         });
     })

@@ -49,9 +49,12 @@ body,html{
 
     }
 }
-#wdBody{
+.wdBody{
     background-color: #fafafa;
 }
 .wdContent{
     background-color: #ffffff;
+}
+#wdFooter{
+    border: 0px;
 }
