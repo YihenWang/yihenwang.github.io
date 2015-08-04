@@ -4,7 +4,7 @@ body,html{
     font-family:  "Microsoft JhengHei" !important;
 }
 #zipcode {
-    font-size: 1.1em;
+    font-size: 1em;
     background-color: #ffffff;
     text-align: center;
     width: 100%;
@@ -29,4 +29,29 @@ body,html{
     font-weight: bold;
     color: #387ef5;
     line-height: 1.5em;
+}
+@media screen and (max-width: 720px) {
+    .wdSide{
+        display: none;
+    }
+    .wdContent{
+        width:100%;
+
+    }
+}
+@media screen and (min-width: 1200px) {
+    .wdSide{
+        width: 100%;
+
+    }
+    .wdContent{
+        width:50%;
+
+    }
+}
+#wdBody{
+    background-color: #fafafa;
+}
+.wdContent{
+    background-color: #ffffff;
 }
