@@ -1,11 +1,11 @@
-angular.module('myWeddingInfo.MainCtrl', [])
-    .controller('mainCtrl', function ($scope, $ionicModal, $state, $ionicPopup, $ionicLoading, Common, linkParse) {
+angular.module('myWeddingInfo.controllers', [])
+    .controller('mainCtrl', function ($scope, $ionicModal, $state, $ionicPopup, $ionicLoading, Common, DataParse) {
         $scope.weddingInfo = {};
         $('#twzipcode').twzipcode();
-        $scope.show = function () {
-            $ionicLoading.show({template: '傳送中<br>請稍後...'});
+        $scope.showMask = function () {
+            $ionicLoading.show({template: '傳送中,請稍後...'});
         };
-        $scope.hide = function () {
+        $scope.hideMask = function () {
             $ionicLoading.hide();
         };
         $scope.checkAttendance = function (num) {
@@ -35,20 +35,16 @@ angular.module('myWeddingInfo.MainCtrl', [])
                                     else {
                                         $scope.weddingInfo.AttendanceNum = parseInt($scope.weddingInfo.AttendanceNum);
                                     }
-                                    console.log($scope.weddingInfo.AttendanceNum);
                                 }
                             }
                         }
                     ]
                 });
             }
-            else {
-                console.log(num);
-            }
         };
         $scope.sendData = function (data) {
             if (!$scope.ValidateData(data)) return;
-            $scope.show();
+            $scope.showMask();
             var guestAddress = ($('#zipcode').val() + ' ' + $('#county').val() + $('#district').val() + data.Address).trim();
             var params = {
                 Name: data.Name,
@@ -58,12 +54,18 @@ angular.module('myWeddingInfo.MainCtrl', [])
                 Address: guestAddress,
                 ThanksMemo: !data.ThanksMemo ? '' : data.ThanksMemo
             };
-            linkParse.create(params).then(function (success) {
-                console.log(success);
+            var callback = function (result) {
+                if (result) {
+                    DataParse.Update(result,params);
+                }
+                else {
+                    DataParse.Add(params);
+                }
+                $scope.hideMask();
                 $scope.weddingInfo = {};
                 $('#zipcode').val(''), $('#county').val(''), $('#district').val('');
-                $scope.hide();
-            });
+            };
+            DataParse.Query(params, callback);
         };
         $scope.ValidateData = function (data) {
             console.log(data);

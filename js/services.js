@@ -1,4 +1,18 @@
 angular.module('myWeddingInfo.services', [])
+    .factory('Common', function ($ionicPopup) {
+        var self = this;
+        self.showAlert = function (title, content, done) {
+            var alertPopup = $ionicPopup.alert({
+                title: title,
+                template: content
+            });
+            alertPopup.then(function (res) {
+                if (done)
+                    done();
+            });
+        };
+        return self;
+    })
     .factory('DBA', function ($http, $q) {
         var self = this;
         self.query = function (method, api, data, header) {
@@ -58,7 +72,7 @@ angular.module('myWeddingInfo.services', [])
         };
         self.getAll = function () {
             return DBA.query('GET', PARSE_API, '', header);
-        }
+        };
         self.get = function (objectId) {
             return DBA.query('GET', PARSE_API + '/' + objectId, '', header);
 
@@ -74,8 +88,57 @@ angular.module('myWeddingInfo.services', [])
         }
         return self;
     })
+    .factory('DataParse', function (PARSE_KEYS,Common) {
+        Parse.initialize(PARSE_KEYS.APP_ID, PARSE_KEYS.REST_API_KEY);
+        var self = this;
+        self.Query = function (userData, callback) {
+            var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
+            var query = new Parse.Query(MyWeddingInfo);
+            if (userData.Name && userData.Phone) {
+                query.equalTo("Name", userData.Name);
+                query.equalTo("Phone", userData.Phone);
+            }
+            query.first({
+                success: function (results) {
+                    if (callback)
+                        callback(results);
+                },
+                error: function (error) {
+                    Common.showAlert("Error", error.code + " " + error.message);
+                }
+            });
+        };
+        self.Add = function (userData, callback) {
+            var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
+            var weddingInfo = new MyWeddingInfo();
+            weddingInfo.save(userData, {
+                    success: function (weddingInfo) {
+                        console.log(weddingInfo);
+                        if (callback)
+                            callback();
+                    },
+                    error: function (weddingInfo, error) {
+                        Common.showAlert("Error", error.code + " " + error.message);
+                    }
+                }
+            );
+        };
+        self.Update = function (result, userData, callback) {
+            result.save(userData, {
+                success: function (result) {
+                    if (callback)
+                        callback();
+                },
+                error: function (weddingInfo, error) {
+                    Common.showAlert("Error", error.code + " " + error.message);
+                }
+            });
+        };
+        return self;
+
+    })
     .value('PARSE_KEYS', {
         APP_ID: '6ZRJK6kD3zZNTHK86dFtOab6i6vHp1QGuYZ2wouk',
-        REST_API_KEY: 'tJIDubakoPQkXhgwGa3u4QNT0orgHtqrtn1zBCFf'
+        REST_API_KEY: 'pIWN8RBjAVwH19reai8aMyV6VSBuYkc7uHeWbHjU'
     })
     .value('PARSE_API', "https://api.parse.com/1/classes/MyWeddingInfo");

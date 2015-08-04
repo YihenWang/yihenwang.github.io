@@ -18,9 +18,7 @@
                 <input type="tel" placeholder="0912345678" ng-model="weddingInfo.Phone" name="Phone" required>
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">
-                    屬於：
-                </span>
+                <span class="input-label">屬於：</span>
                 <ion-radio style="border:0;" ng-model="weddingInfo.Group" name="Group" ng-value="'男方親友'">男方親友
                 </ion-radio>
                 <ion-radio style="border:0;" ng-model="weddingInfo.Group" name="Group" ng-value="'女方親友'">女方親友
@@ -40,33 +38,34 @@
                            ng-change="checkAttendance(weddingInfo.Attendance)" name="Attendance">
                     攜家帶眷<i class="ion-android-person-add"></i></ion-radio>
             </label>
-            <label class="item item-stacked-label">
-                <span class="input-label">
+            <div id="twzipcode">
+                <label class="item item-stacked-label">
+                    <span class="input-label">
                     寄送地址：
                 </span>
-            </label>
+                    <div class="row">
+                        <div data-role="zipcode"
+                             data-name="zipcode"
+                             data-value=""
+                             data-style="zipcode-style" class="col col-20">
+                        </div>
+                        <div data-role="county"
+                             data-name="county"
+                             data-value="縣市"
+                             data-style="county-style" class="col col-34">
+                        </div>
+                        <div data-role="district"
+                             data-name="district"
+                             data-value="鄉鎮市區"
+                             data-style="district-style" class="col">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <textarea placeholder="請填入您的地址" class="street-style" ng-model="weddingInfo.Address" name="Address"></textarea>
+                    </div>
+                </label>
 
-            <div id="twzipcode">
-                <div class="row">
-                    <div data-role="zipcode"
-                         data-name="zipcode"
-                         data-value=""
-                         data-style="zipcode-style" class="col col-20">
-                    </div>
-                    <div data-role="county"
-                         data-name="county"
-                         data-value="縣市"
-                         data-style="county-style" class="col col-34">
-                    </div>
-                    <div data-role="district"
-                         data-name="district"
-                         data-value="鄉鎮市區"
-                         data-style="district-style" class="col">
-                    </div>
-                </div>
-                <div class="row">
-                    <textarea placeholder="請填入您的地址" class="street-style" ng-model="weddingInfo.Address" name="Address"></textarea>
-                </div>
+
             </div>
 
             <label class="item item-input item-stacked-label">
