@@ -29,6 +29,24 @@ angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddin
                         controller: 'mainCtrl'
                     }
                 }
+            })
+            .state('app.photos', {
+                url: '/photos',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/photos.html',
+                        controller: 'mainCtrl'
+                    }
+                }
+            })
+            .state('app.videos', {
+                url: '/videos',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/videos.html',
+                        controller: 'mainCtrl'
+                    }
+                }
             });
     })
     .run(function ($ionicPlatform) {
