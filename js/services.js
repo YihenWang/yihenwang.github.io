@@ -55,7 +55,34 @@ angular.module('myWeddingInfo.services', [])
         }
         return self;
     })
-    .factory('linkParse', function (DBA, PARSE_KEYS, PARSE_API) {
+    .factory('loginParse', function (DBA, PARSE_KEYS, PARSE_API, LOGIN_API, LOGOUT_API, SIGNIN_API) {
+        var self = this;
+        var header = {
+            headers: {
+                'X-Parse-Application-Id': PARSE_KEYS.APP_ID,
+                'X-Parse-REST-API-Key': PARSE_KEYS.REST_API_KEY
+            }
+        };
+        var headerJson = {
+            headers: {
+                'X-Parse-Application-Id': PARSE_KEYS.APP_ID,
+                'X-Parse-REST-API-Key': PARSE_KEYS.REST_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        };
+        self.SignUp = function (object) {
+            return DBA.query('POST', SIGNIN_API, object, headerJson);
+        };
+        self.Login = function (object) {
+            return DBA.query('GET', LOGIN_API + "?" + encodeURI('username=' + object.username + '&password=' + object.password), '', header);
+        };
+        self.Logout = function (sessionToken) {
+            header.headers['X-Parse-Session-Token'] = sessionToken;
+            return DBA.query('POST', LOGOUT_API, '', header);
+        };
+        return self;
+    })
+    .factory('ajaxParse', function (DBA, PARSE_KEYS, PARSE_API) {
         var self = this;
         var header = {
             headers: {
@@ -88,8 +115,8 @@ angular.module('myWeddingInfo.services', [])
         }
         return self;
     })
-    .factory('DataParse', function (PARSE_KEYS,Common) {
-        Parse.initialize(PARSE_KEYS.APP_ID, PARSE_KEYS.REST_API_KEY);
+    .factory('DataParse', function (PARSE_KEYS, Common) {
+        Parse.initialize(PARSE_KEYS.APP_ID, PARSE_KEYS.JAVASCRIPT_KEY);
         var self = this;
         self.Query = function (userData, callback) {
             var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
@@ -107,6 +134,20 @@ angular.module('myWeddingInfo.services', [])
                     Common.showAlert("Error", error.code + " " + error.message);
                 }
             });
+        };
+        self.QueryAll = function (callback) {
+            var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
+            var query = new Parse.Query(MyWeddingInfo);
+            query.find({
+                success: function (results) {
+                    if(callback)
+                        callback(results);
+                }
+            }, {
+                error: function (error) {
+                    Common.showAlert("Error", error.code + " " + error.message);
+                }
+            })
         };
         self.Add = function (userData, callback) {
             var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
@@ -139,6 +180,10 @@ angular.module('myWeddingInfo.services', [])
     })
     .value('PARSE_KEYS', {
         APP_ID: '6ZRJK6kD3zZNTHK86dFtOab6i6vHp1QGuYZ2wouk',
-        REST_API_KEY: 'pIWN8RBjAVwH19reai8aMyV6VSBuYkc7uHeWbHjU'
+        REST_API_KEY: 'tJIDubakoPQkXhgwGa3u4QNT0orgHtqrtn1zBCFf',
+        JAVASCRIPT_KEY: 'pIWN8RBjAVwH19reai8aMyV6VSBuYkc7uHeWbHjU'
     })
-    .value('PARSE_API', "https://api.parse.com/1/classes/MyWeddingInfo");
+    .value('PARSE_API', "https://api.parse.com/1/classes/MyWeddingInfo")
+    .value('LOGIN_API', "https://api.parse.com/1/login")
+    .value('SIGNIN_API', "https://api.parse.com/1/users")
+    .value('LOGOUT_API', "https://api.parse.com/1/logout");

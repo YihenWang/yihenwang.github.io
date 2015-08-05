@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddingInfo.services'])
+angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddingInfo.services','ngStorage','ngMessages','validation.match'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/app/main');
         $stateProvider
@@ -45,6 +45,39 @@ angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddin
                     'menuContent': {
                         templateUrl: 'views/videos.html',
                         controller: 'mainCtrl'
+                    }
+                }
+            })
+            .state('backend', {
+                url: '/backend',
+                abstract: true,
+                templateUrl: 'views/backendtabs.html'
+            })
+            .state('login',{
+                url:'/login',
+                templateUrl : 'views/login.html',
+                controller : 'loginCtrl'
+            })
+            .state('signup',{
+                url:'/signup',
+                templateUrl : 'views/signup.html',
+                controller : 'signupCtrl'
+            })
+            .state('backend.main', {
+                url: '/main',
+                views: {
+                    'backend-main': {
+                        templateUrl: 'views/backend-main.html',
+                        controller: 'backendCtrl'
+                    }
+                }
+            })
+            .state('backend.account', {
+                url: '/account',
+                views: {
+                    'backend-account': {
+                        templateUrl: 'views/backend-account.html',
+                        controller: 'backendCtrl'
                     }
                 }
             });

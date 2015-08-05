@@ -57,12 +57,12 @@ angular.module('myWeddingInfo.controllers', [])
             var callback = function (result) {
                 if (result) {
                     DataParse.Update(result, params, function () {
-                        window.location='/#/app/thanks';
+                        window.location = '/#/app/thanks';
                     });
                 }
                 else {
-                    DataParse.Add(params,function () {
-                        window.location='/#/app/thanks';
+                    DataParse.Add(params, function () {
+                        window.location = '/#/app/thanks';
                     });
                 }
                 $scope.hideMask();
@@ -105,5 +105,74 @@ angular.module('myWeddingInfo.controllers', [])
                 return false;
             }
             return true;
+        };
+    })
+    .controller('loginCtrl', function ($scope, loginParse, $location, $localStorage, $ionicLoading, $window,Common) {
+        $scope.username = '';
+        $scope.password = '';
+        $scope.logon = function (username, password) {
+            if (!username) {
+                Common.showAlert('提示', '請輸入帳號!');
+                return;
+            }
+            else if (!password) {
+                Common.showAlert('提示', '請輸入密碼!');
+                return;
+            }
+            $ionicLoading.show({template: '登入中,請稍後...'});
+            var object = {'username': username, 'password': password};
+            loginParse.Login(object).then(function (result) {
+                $ionicLoading.hide();
+                $localStorage.token = result.data.sessionToken;
+                $window.location.href= '#/backend/main';
+            }, function (error) {
+                $ionicLoading.hide();
+                console.warn(error);
+                $location.path('/login');
+            });
+        };
+    })
+    .controller('signupCtrl', function ($scope, loginParse, $location, $localStorage, $ionicLoading, Common) {
+        $scope.user = {};
+        $scope.signup = function (user) {
+            loginParse.SignUp(user).then(function (result) {
+                $localStorage.token = result.data.sessionToken;
+                console.log(result);
+            }, function (error) {
+                console.warn(error.data.error);
+            });
+        };
+    })
+    .controller('backendCtrl', function ($scope, loginParse, DataParse, $location, $localStorage, $window) {
+        if ($localStorage.hasOwnProperty("token") === true) {
+            $scope.loginout = false;
+            $scope.listAttend = [];
+            var callback = function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var object = result[i];
+                    $scope.listAttend.push(
+                        {
+                            Name: object.get('Name'),
+                            Phone: object.get('Phone'),
+                            Group: object.get('Group'),
+                            Attendance: object.get('GrAttendanceoup'),
+                            Address: object.get('Address'),
+                            ThanksMemo: object.get('ThanksMemo')
+                        });
+                }
+            };
+            DataParse.QueryAll(callback);
+
+        }
+        else {
+            $location.path('/login');
+        }
+        $scope.Logout = function () {
+            if($scope.loginout){
+                $scope.loginout=false;
+            }
+            delete $localStorage.token;
+            //$window.location.reload('true');
+            $window.location.href='#/login';
         };
     });

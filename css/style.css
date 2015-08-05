@@ -11,15 +11,12 @@ body,html{
 }
 .county-style {
     width:100%;
-    font-size: 1.1em;
 }
 .district-style {
     width:100%;
-    font-size: 1.1em;
 }
 .street-style{
     width:100%;
-    font-size: 1.1em;
     text-align: center;
     margin-top:.5em;
 }

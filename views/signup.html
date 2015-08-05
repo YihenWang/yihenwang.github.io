@@ -1,0 +1,41 @@
+<ion-view title="註冊">
+    <ion-nav-bar class="bar bar-balanced">
+    </ion-nav-bar>
+    <ion-content scroll="false">
+        <form name="signupForm" novalidate>
+            <label class="item item-input">
+                <span class="input-label">帳號</span>
+                <input type="text" ng-model="user.username" name="username" required>
+            </label>
+            <div ng-messages="signupForm.username.$error" role="alert" ng-if="signupForm.username.$touched">
+                <div ng-message="required">沒輸入帳號唷!</div>
+            </div>
+            <label class="item item-input">
+                <span class="input-label">密碼</span>
+                <input type="password" ng-model="user.password" name="password" required>
+            </label>
+            <div ng-messages="signupForm.password.$error" role="alert" ng-if="signupForm.password.$touched">
+                <div ng-message="required">沒輸入密碼唷!</div>
+                <div ng-message="pattern">密碼格式錯誤唷!</div>
+            </div>
+            <label class="item item-input">
+                <span class="input-label">密碼確認</span>
+                <input type="password" ng-model="password2" name="password2" required>
+            </label>
+            <div ng-messages="signupForm.password2.$error" role="alert" ng-if="signupForm.password2.$touched">
+                <div ng-message="required">沒輸入密碼確認唷!</div>
+            </div>
+            <label class="item item-input">
+                <span class="input-label">e-mail</span>
+                <input type="email" ng-model="user.email" name="email" required>
+            </label>
+            <div ng-messages="signupForm.email.$error" role="alert" ng-if="signupForm.email.$touched">
+                <div ng-message="required">沒輸入email唷!</div>
+                <div ng-message="email">沒輸入email唷!</div>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-calm icon-left ion-log-in" ng-click="signup(user)">註冊</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
