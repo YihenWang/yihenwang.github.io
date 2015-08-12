@@ -180,19 +180,19 @@ angular.module('myWeddingInfo.services', [])
     .factory('MAP', function () {
         var self = this;
         self.initialize = function (id) {
-            var LatLng = navigator.geolocation.getCurrentPosition(function (pos) {
+            /*var LatLng = navigator.geolocation.getCurrentPosition(function (pos) {
                 return new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-            });// 目前位置
+            });// 目前位置*/
             var mapOptions = {
-                center:Lating,
-                zoom:15,
-                mapTypeId:google.maps.MapTypeId.ROADMAP
+                center: new google.maps.LatLng(25, 121),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var map = new google.maps.Map(document.getElementById(id), mapOptions);
             return map;
         };
         self.setLocation = function (map, pos) {
-            var maker=new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(pos.lat, pos.lng),
                 map: map,
                 title: pos.title
