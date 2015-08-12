@@ -55,3 +55,10 @@ body,html{
 #wdFooter{
     border: 0px;
 }
+.scroll{
+    height:100%;
+}
+#map {
+    width:100%;
+    height:100%;
+}

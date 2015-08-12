@@ -26,7 +26,7 @@ angular.module('myWeddingInfo', ['ionic', 'myWeddingInfo.controllers', 'myWeddin
                 views: {
                     'menuContent': {
                         templateUrl: 'views/thanks.html',
-                        controller: 'mainCtrl'
+                        controller: 'thanksCtrl'
                     }
                 }
             })

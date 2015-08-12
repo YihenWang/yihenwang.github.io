@@ -1,3 +1,4 @@
+var map=null;
 angular.module('myWeddingInfo.controllers', [])
     .controller('mainCtrl', function ($scope, $ionicModal, $location, $ionicPopup, $ionicLoading, $ionicScrollDelegate, Common, DataParse) {
         $scope.weddingInfo = {};
@@ -175,4 +176,14 @@ angular.module('myWeddingInfo.controllers', [])
             //$window.location.reload('true');
             $window.location.href='#/login';
         };
-    });
+    })
+.controller('thanksCtrl', function ($scope, MAP) {
+    $scope.poi={
+        "name":"基隆港海產樓",
+        "address":"基隆市信義區信二路181號",
+        "lating":[25.1295278,121.7508176]
+    };
+    map = MAP.initialize('map'); 
+    var marker = {lat: ($scope.poi.latlng)[0], lng: ($scope.poi.latlng)[1], title: $scope.poi.name};
+    MAP.setLocation(map, marker);
+});

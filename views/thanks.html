@@ -1,9 +1,22 @@
 <ion-view title="感謝填寫">
     <ion-content class="wdBody">
-        <h2>Thank you!!!</h2><br>
-        <div class="item item-image">
-            <img ng-src="//www.spc.ntnu.edu.tw/_other/site/upload_file/f4c90900d3a8769eb5977cbe515fdf1c.jpg" class="fullscreen-image"/>
+        <div class="card list">
+           <div class="item">
+               <h2>感謝您的填寫，以下是宴客餐廳的位置：</h2>
+               <p class="row">
+                   <span class="col-20">餐廳名稱</span><span class="col-80">{{poi.name}}</span>
+               </p>
+               <p class="row">
+                   <span class="col-20">地址</span><span class="col-80">{{poi.address}}</span>
+               </p>
+           </div>
+            <div class="item item-body">
+                <div class="row">
+                    <div class="col col-center">
+                        <div style="width:250px;height:250px;" id="map" data-tap-disabled="true"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </ion-content>
 </ion-view>

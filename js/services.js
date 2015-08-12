@@ -18,38 +18,38 @@ angular.module('myWeddingInfo.services', [])
         self.query = function (method, api, data, header) {
             var q = $q.defer();
             switch (method) {
-                case 'GET':
-                    $http.get(api, header).then(function (result) {
-                        q.resolve(result);
-                    }, function (error) {
-                        console.warn(error);
-                        q.reject(error);
-                    })
-                    break;
-                case 'POST':
-                    $http.post(api, data, header).then(function (result) {
-                        q.resolve(result);
-                    }, function (error) {
-                        console.warn(error);
-                        q.reject(error);
-                    })
-                    break;
-                case 'PUT':
-                    $http.put(api, data, header).then(function (result) {
-                        q.resolve(result);
-                    }, function (error) {
-                        console.warn(error);
-                        q.reject(error);
-                    })
-                    break;
-                case 'DELETE':
-                    $http.delete(api, header).then(function (result) {
-                        q.resolve(result);
-                    }, function (error) {
-                        console.warn(error);
-                        q.reject(error);
-                    })
-                    break;
+            case 'GET':
+                $http.get(api, header).then(function (result) {
+                    q.resolve(result);
+                }, function (error) {
+                    console.warn(error);
+                    q.reject(error);
+                })
+                break;
+            case 'POST':
+                $http.post(api, data, header).then(function (result) {
+                    q.resolve(result);
+                }, function (error) {
+                    console.warn(error);
+                    q.reject(error);
+                })
+                break;
+            case 'PUT':
+                $http.put(api, data, header).then(function (result) {
+                    q.resolve(result);
+                }, function (error) {
+                    console.warn(error);
+                    q.reject(error);
+                })
+                break;
+            case 'DELETE':
+                $http.delete(api, header).then(function (result) {
+                    q.resolve(result);
+                }, function (error) {
+                    console.warn(error);
+                    q.reject(error);
+                })
+                break;
             }
             return q.promise;
         }
@@ -140,7 +140,7 @@ angular.module('myWeddingInfo.services', [])
             var query = new Parse.Query(MyWeddingInfo);
             query.find({
                 success: function (results) {
-                    if(callback)
+                    if (callback)
                         callback(results);
                 }
             }, {
@@ -153,16 +153,15 @@ angular.module('myWeddingInfo.services', [])
             var MyWeddingInfo = Parse.Object.extend("MyWeddingInfo");
             var weddingInfo = new MyWeddingInfo();
             weddingInfo.save(userData, {
-                    success: function (weddingInfo) {
-                        console.log(weddingInfo);
-                        if (callback)
-                            callback();
-                    },
-                    error: function (weddingInfo, error) {
-                        Common.showAlert("Error", error.code + " " + error.message);
-                    }
+                success: function (weddingInfo) {
+                    console.log(weddingInfo);
+                    if (callback)
+                        callback();
+                },
+                error: function (weddingInfo, error) {
+                    Common.showAlert("Error", error.code + " " + error.message);
                 }
-            );
+            });
         };
         self.Update = function (result, userData, callback) {
             result.save(userData, {
@@ -177,6 +176,31 @@ angular.module('myWeddingInfo.services', [])
         };
         return self;
 
+    })
+    .factory('MAP', function () {
+        var self = this;
+        self.initialize = function (id) {
+            var LatLng = navigator.geolocation.getCurrentPosition(function (pos) {
+                return new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            });// 目前位置
+            var mapOptions = {
+                center:Lating,
+                zoom:15,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById(id), mapOptions);
+            return map;
+        };
+        self.setLocation = function (map, pos) {
+            var maker=new google.maps.Marker({
+                position: new google.maps.LatLng(pos.lat, pos.lng),
+                map: map,
+                title: pos.title
+            });
+            map.setCenter(marker.getPosition());
+            return map;
+        };
+        return self;
     })
     .value('PARSE_KEYS', {
         APP_ID: '6ZRJK6kD3zZNTHK86dFtOab6i6vHp1QGuYZ2wouk',
