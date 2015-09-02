@@ -154,7 +154,6 @@ angular.module('myWeddingInfo.services', [])
             var weddingInfo = new MyWeddingInfo();
             weddingInfo.save(userData, {
                 success: function (weddingInfo) {
-                    console.log(weddingInfo);
                     if (callback)
                         callback();
                 },
